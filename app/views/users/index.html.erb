@@ -1,0 +1,57 @@
+<p>
+ <%= text_field_tag :search, params[:search] %>
+ <%= submit_tag "Search by name or subject ", :name => nil %>
+ <br><%= radio_button_tag 'radio_input', 'name', true %> name
+ <br><%= radio_button_tag 'radio_input', 'subject' %> subject
+</p>
+
+<%#= simple_form_for :search, url: users_path, method: "GET", html: { class: 'form-inline' } do |f| %>
+  <%#= f.input :name, input_html: {value: ""} %>   
+  <%#= f.submit "Search", class: "btn btn-primary" %>
+  <%#= link_to 'Back', users_path %>
+<%# end %>
+
+<h1>Listing Students</h1>
+<%= link_to 'New Student', new_user_path %>
+
+<table class="table1">
+  
+ <tr>
+    <th><%= sortable "name" %></th>
+    <th><%= sortable "age" %></th>
+    <th><%= sortable "subject"%></th>
+    <th colspan="3"><%= "   Options" %></th>
+ </tr>
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.name %></td>
+      <td><%= user.age %></td>
+      <td><%= user.subject %></td>
+      <td><%= link_to 'Show', user_path(user) %></td>
+      <td><%= link_to 'Edit', edit_user_path(user) %></td>
+      <td><%= link_to 'Destroy', user_path(user),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>
+
+
+<style>
+      table,
+      th,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+          width: 100%;
+        }
+
+        th, td {
+          text-align: left;
+          padding: 8px;
+        }
+        tr:nth-child(odd) {background-color: white}
+        tr:nth-child(even) {background-color: #f2f2f2;}
+      }
+
+</style>

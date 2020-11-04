@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Task</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <%= image_tag "index2.jpeg", class: "logo" %> 
+    <div class="dropdown">
+      <button class="dropbtn">Menu</button>
+      <div class="dropdown-content"> 
+        <% if student_signed_in? %>
+
+          <a href="#"><%=  link_to 'logout',destroy_student_session_path,method: :delete %></a>  
+          <a href="#"><%= link_to 'Profile', edit_student_registration_path %></a>
+        <% else %>
+          <a href="#"><%=  link_to 'login', student_session_path %></a>
+          <a href=""><%= link_to 'signup', student_registration_path %></a>
+        <% end %>
+      </div>
+    </div> 
+
+    <div class="container-fluid" style="background-image: url('/assets/index4.jpeg'); position: absolute; height: 650px;  background-repeat: no-repeat; background-size: cover;" >
+
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      <%= yield %>
+
+    </div>
+
+  </body>
+</html>
