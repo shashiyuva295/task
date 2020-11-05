@@ -2,7 +2,6 @@ class User < ApplicationRecord
 	before_create do
 	  self.name = name.capitalize
 	end
-	
 end
 
 # def self.search(search)
@@ -13,10 +12,10 @@ end
 #   end
 # end
 
-def self.search(search)
- if search
-   User.where(['name LIKE ? OR subject LIKE ?',"%#{search}%","%#{search}%"])
- else
-   User.all
- end
-end
+# def self.search(search)
+# 	if search
+# 		User.where(['name LIKE ? OR subject LIKE ?',"%#{search}%","%#{search}%"])
+# 	else
+# 		User.all
+#   	end
+# end

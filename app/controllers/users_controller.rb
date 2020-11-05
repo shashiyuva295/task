@@ -1,32 +1,26 @@
 class UsersController < ApplicationController
 	helper_method :sort_column, :sort_direction
+	
 	def index
 		@users = User.all
 		@users = User.order(sort_column + " " + sort_direction)
-		
-		#if params[:radio_input] == 'name'
-			#@search = params["search"]
-			#@search.present?
-		  	#@name = @search["name"]
-		  	#@users = User.where(title: @name)
-		  	#@users = User.where("name LIKE OR  ?", "%#{@name}%")
-		#else
-			#@search = params["search"]
-			#@subject = @search["subject"]
-			#@users = User.where(title: @name)
-			#@users = User.where("subject LIKE OR  ?", "%#{@subject}%")
 
-		#end
-		if params[:radio_input] == 'name'
-			@users = User.search(params[:search])
-		elsif params[:radio_input] == 'subject'
-		 	@users = User.search(params[:search])
-		 else
-		 	User.all
-		 end
+	if params[:radio_input] == 'name'
+	@search = params[:search]
+		if @search.present?
+			@users = User.where("name LIKE ? ", "%#{@search}%")
+		end
+	elsif params[:radio_input] == 'subject'
+		@search = params[:search]
+		if @search.present?
+		 	@users = User.where("subject LIKE   ?", "%#{@search}%")
+		end
+	else
+		User.all
 	end
-	
-	
+
+	end
+		
 	def show
 		@user = User.find(params[:id])	  
 	end
