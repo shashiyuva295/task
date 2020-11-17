@@ -4,20 +4,31 @@ class UsersController < ApplicationController
 	def index
 		@users = User.all
 		@users = User.order(sort_column + " " + sort_direction)
+		
+		# if params[:search].present?
+		# 	@users = User.search(params[:search])
+		# end
+		# if params[:name]
+		# 	@user = User.where('name LIKE ?', "%{params[:name]}%")
+		# else
+		# 	@user = User.all
+		# end
+	
 
-		if params[:radio_input] == 'name'
-		@search = params[:search]
-			if @search.present?
-				@users = User.where("name LIKE ? ", "%#{@search}%")
-			end
-		elsif params[:radio_input] == 'subject'
-			@search = params[:search]
-			if @search.present?
-		 		@users = User.where("subject LIKE   ?", "%#{@search}%")
-			end
-		else
-			User.all
-		end
+		#*** search ***#
+		# if params[:radio_input] == 'name'
+		# @search = params[:search]
+		# 	if @search.present?
+		# 		@users = User.where("name LIKE ? ", "%#{@search}%")
+		# 	end
+		# elsif params[:radio_input] == 'subject'
+		# 	@search = params[:search]
+		# 	if @search.present?
+		#  		@users = User.where("subject LIKE   ?", "%#{@search}%")
+		# 	end
+		# else
+		# 	User.all
+		# end
 
 	end
 		

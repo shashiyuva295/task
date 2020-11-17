@@ -1,12 +1,21 @@
-<%= simple_form_for :search, url: users_path, method: "GET", html: { class: 'form-inline' } do |f| %>
-<%= text_field_tag :search %>
-<%= submit_tag "Search by name or subject ", :name => nil %>
-<br><%= radio_button_tag 'radio_input', 'name', true %> name
-<br><%= radio_button_tag 'radio_input', 'subject' %> subject
+<%#= form_tag users_path, method: 'get', id: "users_search" do %>
+ <%# <p>
+    <%#= text_field_tag :search, params[:search] %>
+    <%#= submit_tag "Search", :name => nil %>
+  <%#  </p>
+<%# end %>
 
-<br><%= link_to 'Back', users_path %>
 
-<% end %>
+<%#= Search using radio button %>
+<%#= simple_form_for :search, url: users_path, method: "GET", html: { class: 'form-inline' } do |f| %>
+<%#= text_field_tag :search %>
+<%#= submit_tag "Search by name or subject ", :name => nil %>
+<%#= radio_button_tag 'radio_input', 'name', true %>  <%#name
+<%#= radio_button_tag 'radio_input', 'subject' %>     <%#subject
+
+<br><%#= link_to 'Back', users_path %>
+
+<%# end %>
 <%#= simple_form_for :search, url: users_path, method: "GET", html: { class: 'form-inline' } do |f| %>
   <%#= f.input :name, input_html: {value: ""} %>   
   <%#= f.submit "Search", class: "btn btn-primary" %>
