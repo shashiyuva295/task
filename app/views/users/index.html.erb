@@ -1,21 +1,43 @@
-<%#= form_tag users_path, method: 'get', id: "users_search" do %>
- <%# <p>
-    <%#= text_field_tag :search, params[:search] %>
-    <%#= submit_tag "Search", :name => nil %>
-  <%#  </p>
-<%# end %>
+<%= simple_form_for :search, url: users_path, method: "GET" do |f| %>
+  <%= text_field_tag :search, "", class: "search_users", remote: true %>
 
+<% end %>
+
+<script type="text/javascript">
+  $(".search_users").keyup(function() {
+  $.ajax({
+    url: '/users',
+    data: {search: $(this).serialize()}
+  });
+});
+</script>
+
+ <%#= simple_form_for :search, url: users_path, method: "GET", html: { class: 'form-inline' } do |f| %>
+ <%#= text_field_tag :search %>
+ <%#= submit_tag "Search by name or subject ", :name => nil %>
+ <%#= radio_button_tag 'radio_input', 'name', true %> <%#name
+ <%#= radio_button_tag 'radio_input', 'subject' %> <%#subject
+
+ <br><%#= link_to 'Back', users_path %>
+
+ <%# end %> 
+
+ <%#= form_with(url: "/users", method: :get, data: {action: "submit->search#submit"}) do |f| %>
+   <%#= label_tag(:query, "Search for") %>
+   <%#= text_field_tag :query, params[:query], data: {target: "search.query"} %>
+   <%#= submit_tag("Search", class: "btn btn-primary") %>
+ <%# end %>
+
+<!-- <div class="container">
+  <h1 class="text-center">Users</h1>
+  <div class="row justify-content-center" data-controller="search">
+   [... search form and content here...]
+  </div>
+</div>
+ -->
 
 <%#= Search using radio button %>
-<%#= simple_form_for :search, url: users_path, method: "GET", html: { class: 'form-inline' } do |f| %>
-<%#= text_field_tag :search %>
-<%#= submit_tag "Search by name or subject ", :name => nil %>
-<%#= radio_button_tag 'radio_input', 'name', true %>  <%#name
-<%#= radio_button_tag 'radio_input', 'subject' %>     <%#subject
 
-<br><%#= link_to 'Back', users_path %>
-
-<%# end %>
 <%#= simple_form_for :search, url: users_path, method: "GET", html: { class: 'form-inline' } do |f| %>
   <%#= f.input :name, input_html: {value: ""} %>   
   <%#= f.submit "Search", class: "btn btn-primary" %>
@@ -46,7 +68,7 @@
     </tr>
   <% end %>
 </table>
-
+<%= link_to 'Back', users_path %>
 
 <style>
       table,

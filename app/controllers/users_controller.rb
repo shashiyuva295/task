@@ -1,10 +1,34 @@
 class UsersController < ApplicationController
 	helper_method :sort_column, :sort_direction
-	
+	respond_to :html, :json
+
 	def index
 		@users = User.all
 		@users = User.order(sort_column + " " + sort_direction)
+	
+		if params[:search].present?
+			@users = User.search(params[:search].split("=").last)
+		  else
+		    @users = User.all
+		end
+		respond_to do |format|
+		    format.html
+		    format.json  { render :json => @users }	
+		end
+
+	# 	if params[:query].present?
+	# 	    @users = User.search(params[:query])
+	# 	  else
+	# 	    @users = User.all
+	# 	end
+
+	# 	respond_to do |formate|
+	# 		formate.html
+	# 		formate.json {render json: {users: @users}}
 		
+	# 	end
+
+
 		# if params[:search].present?
 		# 	@users = User.search(params[:search])
 		# end
@@ -15,7 +39,7 @@ class UsersController < ApplicationController
 		# end
 	
 
-		#*** search ***#
+		#***radio search ***#
 		# if params[:radio_input] == 'name'
 		# @search = params[:search]
 		# 	if @search.present?
